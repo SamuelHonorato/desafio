@@ -13,18 +13,18 @@ defmodule Helpers.CalculateHelper do
     abs_value = Integer.floor_div(total, count)
     rest_value = total - abs_value * count
 
-    abs_value_list = Enum.map(1..count, fn _ -> abs_value end)
+    1..count
+    |> Enum.map(fn _ -> abs_value end)
+    |> generate_list_value(rest_value)
+  end
 
-    case rest_value do
-      0 ->
-        abs_value_list
+  defp generate_list_value(abs_value_list, 0), do: abs_value_list
 
-      _ ->
-        abs_rest_list = Enum.map(1..rest_value, fn _ -> 1 end)
+  defp generate_list_value(abs_value_list, rest_value) do
+    abs_rest_list = Enum.map(1..rest_value, fn _ -> 1 end)
 
-        Enum.with_index(abs_value_list, fn element, index ->
-          element + Enum.at(abs_rest_list, index, 0)
-        end)
-    end
+    Enum.with_index(abs_value_list, fn element, index ->
+      element + Enum.at(abs_rest_list, index, 0)
+    end)
   end
 end
