@@ -6,9 +6,7 @@ defmodule Validates.ListPeopleValidate do
     end
   end
 
-  defp validate_emails([]) do
-    {:error, :emails_list_is_empty}
-  end
+  defp validate_emails([]), do: {:error, :emails_list_is_empty}
 
   defp validate_emails(emails) when is_list(emails) do
     try do
@@ -30,14 +28,18 @@ defmodule Validates.ListPeopleValidate do
   end
 
   defp validate_duplicate_emails(emails) do
-    lenght_uniq_list =
+    result =
       emails
       |> Enum.uniq()
       |> Enum.count()
-
-    case Enum.count(emails) == lenght_uniq_list do
+      |> is_duplicated?(Enum.count(emails))
+    
+    case result do
       true -> {:ok}
       _ -> {:error, :list_has_duplicate_email}
     end
   end
+
+  defp is_duplicated?(amount_1, amount_2) when amount_1 == amount_2, do: true
+  defp is_duplicated?(_, _), do: false
 end
