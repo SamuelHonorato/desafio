@@ -1,6 +1,8 @@
 defmodule Helpers.CalculateHelper do
   def sum_cart(items) do
-    Enum.reduce(items, 0, fn item, acc -> item[:value] * item[:amount] + acc end)
+    Enum.reduce(items, 0, fn item, acc -> 
+      item[:value] * item[:amount] + acc
+    end)
   end
 
   def format(values, emails) do
