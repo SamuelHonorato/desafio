@@ -29,7 +29,7 @@ docker exec -it desafio_db psql -U postgres -a -q -f sql/query.sql
 docker compose run desafio_app mix test
 ```
 
-## Critério de Aceite
+## Critérios de Aceite
 
 - Não trabalhe com valores com decimais. Ou seja, ponto flutuante ou float. Use inteiros para representar os valores! Como a menor unidade na nossa moeda é o centavo, use valores inteiros em centavos. Assim, um real será representado por 100 (cem centavos é igual a um real).
 
