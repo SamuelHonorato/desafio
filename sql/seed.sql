@@ -38,6 +38,7 @@ CREATE TABLE documents (
 
 CREATE TABLE transfers (
   id INT PRIMARY KEY,
+  transfer_from INT REFERENCES accounts NOT NULL,
   transfer_to INT REFERENCES accounts NOT NULL,
   document_id INT REFERENCES documents NOT NULL,
   created_at TIMESTAMP NOT NULL
@@ -56,7 +57,6 @@ CREATE TABLE transactions (
   TYPE TRANSACTIONS_ENUM NOT NULL,
   value INT NOT NULL,
   transaction_at TIMESTAMP NOT NULL,
-  transaction_group VARCHAR (50) NOT NULL,
   transfer_id INT REFERENCES transfers,
   account_id INT REFERENCES accounts NOT NULL,
   created_at TIMESTAMP NOT NULL
@@ -85,9 +85,9 @@ VALUES
   (1, 'CPF', '14284200020', NOW());
 
 INSERT INTO
-  transfers(id, transfer_to, document_id, created_at)
+  transfers(id, transfer_from, transfer_to, document_id, created_at)
 VALUES
-  (1, 2, 1, NOW());
+  (1, 1, 2, 1, NOW());
 
 INSERT INTO
   transactions(
@@ -95,7 +95,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -106,7 +105,6 @@ VALUES
     'PAYMENT',
     1000,
     '2023-01-01 00:00:00',
-    '1',
     NULL,
     1,
     NOW()
@@ -118,7 +116,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -129,7 +126,6 @@ VALUES
     'PAYMENT',
     2000,
     '2023-02-01 00:00:00',
-    '2',
     NULL,
     1,
     NOW()
@@ -141,7 +137,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -152,7 +147,6 @@ VALUES
     'PAYMENT',
     3000,
     '2023-03-01 00:00:00',
-    '3',
     NULL,
     1,
     NOW()
@@ -164,7 +158,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -175,7 +168,6 @@ VALUES
     'PAYMENT',
     4000,
     '2023-04-01 00:00:00',
-    '4',
     NULL,
     2,
     NOW()
@@ -187,7 +179,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -198,7 +189,6 @@ VALUES
     'PAYMENT',
     5000,
     '2023-05-01 00:00:00',
-    '5',
     NULL,
     2,
     NOW()
@@ -210,7 +200,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -221,7 +210,6 @@ VALUES
     'PAYMENT',
     5000,
     '2023-05-01 00:00:00',
-    '6',
     NULL,
     2,
     NOW()
@@ -233,7 +221,6 @@ VALUES
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -244,7 +231,6 @@ VALUES
     'TRANSFER_SENT',
     9000,
     '2023-10-01 00:00:00',
-    'foo',
     1,
     1,
     NOW()
@@ -256,7 +242,6 @@ INSERT INTO
     TYPE,
     value,
     transaction_at,
-    transaction_group,
     transfer_id,
     account_id,
     created_at
@@ -267,7 +252,6 @@ VALUES
     'TRANSFER_RECEIVED',
     9000,
     '2023-10-01 00:00:00',
-    'foo',
     1,
     2,
     NOW()

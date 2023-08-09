@@ -1,8 +1,8 @@
 SELECT
-  SUM(value) AS "valor",
-  COUNT(value) AS "total",
-  TYPE AS "tipo",
-  to_char(transaction_at, 'YYYY-MM') AS "data"
+  to_char(transaction_at, 'MM/YY') AS "Data",
+  SUM(value) AS "Valor",
+  COUNT(value) AS "Transacoes",
+  TYPE AS "Tipo"
 FROM
   transactions
 GROUP BY
