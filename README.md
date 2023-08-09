@@ -5,7 +5,6 @@ Na pasta raiz do projeto executar:
 ```
 docker compose up -d
 docker cp sql desafio_db:/
-docker compose build desafio_app
 docker compose run desafio_app mix deps.get
 ```
 
@@ -18,6 +17,12 @@ docker exec -it desafio_db psql -U postgres -a -q -f sql/seed.sql
 ```
 docker exec -it desafio_db psql -U postgres -a -q -f sql/query.sql
 ```
+
+## Credenciais do Banco de dados
+- Usuário: postgres
+- Senha: 12345
+- Banco de dados: postgres
+- Porta: 5455
 
 ## Executar teste no projeto Elixir
 ```
