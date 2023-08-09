@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  desafio_app:
+    build:
+      context: .
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+
+  db:
+    container_name: desafio_db
+    image: postgres:14.5
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=12345
+    ports:
+      - '5455:5432'
