@@ -5,9 +5,7 @@ defmodule Validates.CartValidate do
     end
   end
 
-  defp validate_cart([]) do
-    {:error, :cart_is_empty}
-  end
+  defp validate_cart([]), do: {:error, :cart_is_empty}
 
   defp validate_cart(cart) when is_list(cart) do
     try do
